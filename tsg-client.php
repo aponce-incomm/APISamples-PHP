@@ -209,15 +209,15 @@ function parseJSONResponse(){
 global $buffer;
 $transaction = json_decode($buffer);
 			if($transaction){ //http status 200
-				if($transaction->result_code and $transaction->result_code == "0000"){
+				if(isset($transaction->result_code) and $transaction->result_code == "0000"){
 					echo "-----------------------------------------------------". "\n";
 					echo "TRANSACTION APPROVED: " . $transaction->authorization_code. "\n";
 				}
 				else{
 					$code = "";
-					if($transaction->error_code)
+					if(isset($transaction->error_code))
 						$code = $transaction->error_code;
-					if($transaction->result_code)
+					if(isset($transaction->result_code))
 						$code = $transaction->result_code;
 					echo "-----------------------------------------------------". "\n";
 					echo "TRANSACTION ERROR: Code=" . $code . " Message=" . $transaction->display_message. "\n";
